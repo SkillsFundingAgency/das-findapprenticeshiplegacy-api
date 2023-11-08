@@ -12,4 +12,13 @@
     <PackageReference Include="MongoDB.Driver.Core" Version="2.22.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.FAA.Legacy.Data\SFA.DAS.FAA.Legacy.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Communication\" />
+    <Folder Include="Context\" />
+  </ItemGroup>
+
 </Project>

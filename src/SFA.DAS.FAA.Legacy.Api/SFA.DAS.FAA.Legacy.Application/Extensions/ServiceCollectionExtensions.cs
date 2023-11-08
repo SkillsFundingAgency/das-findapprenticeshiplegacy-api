@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SFA.DAS.FAA.Legacy.Application.Mediatr.Behaviours;
+using SFA.DAS.FAA.Legacy.Data.Extensions;
 using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.FAA.Legacy.Application.Extensions
@@ -14,6 +15,7 @@ namespace SFA.DAS.FAA.Legacy.Application.Extensions
             services.AddMediatR(typeof(ServiceCollectionExtensions));
             services.AddValidatorsFromAssembly(typeof(ServiceCollectionExtensions).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.RegisterServices();
         }
     }
 }

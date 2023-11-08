@@ -84,8 +84,8 @@ namespace SFA.DAS.FAA.Legacy.Api
                     options.OperationFilter<SwaggerVersionHeaderFilter>();
                 });
 
-            services.Configure<MongoConfiguration>(Configuration.GetSection("MongoConfiguration"));
-            services.AddSingleton(s => s.GetRequiredService<IOptions<MongoConfiguration>>().Value);
+            services.Configure<MongoDbConfiguration>(Configuration.GetSection("MongoDbConfiguration"));
+            services.AddSingleton<IMongoDbConfiguration>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoDbConfiguration>>().Value);
 
             services.AddApplicationRegistrations();
         }
@@ -104,11 +104,11 @@ namespace SFA.DAS.FAA.Legacy.Api
             app.UseHttpsRedirection();
             app.UseRouting();
 
-            app.UseHealthChecks("/health",
-                new HealthCheckOptions
-                {
-                    ResponseWriter = HealthCheckResponseWriter.WriteJsonResponse
-                });
+            //app.UseHealthChecks("/health",
+            //    new HealthCheckOptions
+            //    {
+            //        ResponseWriter = HealthCheckResponseWriter.WriteJsonResponse
+            //    });
 
             if (!IsEnvironmentLocalOrDev)
                 app.UseHealthChecks("/ping",
