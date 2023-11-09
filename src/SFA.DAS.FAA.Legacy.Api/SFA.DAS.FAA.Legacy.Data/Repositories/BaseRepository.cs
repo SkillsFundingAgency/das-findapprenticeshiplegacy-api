@@ -9,11 +9,17 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly IMongoCollection<TEntity> _collection;
+        private readonly IMongoDatabase _database;
 
         protected BaseRepository(IMongoDbConfiguration settings)
         {
-            var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
-            _collection = database.GetCollection<TEntity>(BaseRepository<TEntity>.GetCollectionName(typeof(TEntity)));
+            var mongoConnectionString = settings.ConnectionString;
+            var mongoDbName = MongoUrl.Create(mongoConnectionString).DatabaseName;
+
+            _database = new MongoClient(mongoConnectionString)
+                .GetDatabase(mongoDbName);
+
+            _collection = _database.GetCollection<TEntity>(BaseRepository<TEntity>.GetCollectionName(typeof(TEntity)));
         }
 
         private protected static string GetCollectionName(Type documentType)
