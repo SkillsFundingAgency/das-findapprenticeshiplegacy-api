@@ -4,6 +4,6 @@ namespace SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories
 {
     public interface IHealthStatusRepository
     {
-        Task<HealthCheckResult> IsHealthy();
+        Task<HealthCheckResult> HealthCheck();
     }
 }

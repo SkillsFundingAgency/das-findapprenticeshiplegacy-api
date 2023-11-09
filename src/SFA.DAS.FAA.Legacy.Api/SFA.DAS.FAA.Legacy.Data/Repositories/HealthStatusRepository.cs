@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using SFA.DAS.FAA.Legacy.Domain.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 using SFA.DAS.FAA.Legacy.Domain.Models.HealthStatus;
 
+[assembly: InternalsVisibleTo("SFA.DAS.FAA.Legacy.Data.UnitTests")]
 namespace SFA.DAS.FAA.Legacy.Data.Repositories
 {
     public class HealthStatusRepository : IHealthStatusRepository
@@ -20,7 +22,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             _logger = logger;
         }
 
-        public async Task<HealthCheckResult> IsHealthy()
+        public async Task<HealthCheckResult> HealthCheck()
         {
             try
             {
@@ -33,14 +35,14 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
                 return HealthCheckResult.UnHealthy;
             }
         }
-
-        private async Task IsMongoHealthy()
+        
+        internal async Task IsMongoHealthy()
         {
             var url = new MongoUrl(_mongoDbConfiguration.ConnectionString);
 
             var dbInstance = new MongoClient(url)
                 .GetDatabase(url.DatabaseName)
-                .WithReadPreference(new ReadPreference(ReadPreferenceMode.Primary));
+                .WithReadPreference(new ReadPreference(ReadPreferenceMode.Secondary));
 
             _ = await dbInstance.RunCommandAsync<BsonDocument>(new BsonDocument { { "ping", 1 } });
         }

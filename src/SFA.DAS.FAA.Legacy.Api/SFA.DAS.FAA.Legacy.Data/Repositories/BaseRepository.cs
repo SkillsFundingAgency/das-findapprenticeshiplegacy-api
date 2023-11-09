@@ -10,13 +10,13 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
     {
         private readonly IMongoCollection<TEntity> _collection;
 
-        public BaseRepository(IMongoDbConfiguration settings)
+        protected BaseRepository(IMongoDbConfiguration settings)
         {
             var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName);
-            _collection = database.GetCollection<TEntity>(GetCollectionName(typeof(TEntity)));
+            _collection = database.GetCollection<TEntity>(BaseRepository<TEntity>.GetCollectionName(typeof(TEntity)));
         }
 
-        private protected string GetCollectionName(Type documentType)
+        private protected static string GetCollectionName(Type documentType)
         {
             return ((BsonCollectionAttribute)documentType.GetCustomAttributes(
                     typeof(BsonCollectionAttribute),

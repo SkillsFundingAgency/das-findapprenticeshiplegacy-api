@@ -12,7 +12,7 @@ namespace SFA.DAS.FAA.Legacy.Application.Health.Queries
 
         public async Task<GetHealthStatusResult> Handle(GetHealthStatusQuery request, CancellationToken cancellationToken)
         {
-            return await _healthStatusRepository.IsHealthy();
+            return await _healthStatusRepository.HealthCheck();
         }
     }
 }

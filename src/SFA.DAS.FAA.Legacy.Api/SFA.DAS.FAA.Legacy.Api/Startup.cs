@@ -118,7 +118,7 @@ namespace SFA.DAS.FAA.Legacy.Api
                         ResponseWriter = (context, report) =>
                         {
                             context.Response.ContentType = "application/json";
-                            return context.Response.WriteAsync("");
+                            return context.Response.WriteAsync("pong");
                         }
                     });
 

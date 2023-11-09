@@ -4,11 +4,11 @@ namespace SFA.DAS.FAA.Legacy.Application.Health.Queries
 {
     public class GetHealthStatusResult
     {
-        public HealthCheckResult Status { get; set; }
+        public string? Status { get; init; }
 
         public static implicit operator GetHealthStatusResult(HealthCheckResult result) => new()
         {
-            Status = result
+            Status = result.ToString()
         };
     }
 }
