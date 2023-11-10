@@ -25,6 +25,8 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
         [ProducesResponseType(typeof(GetHealthStatusResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetHealth()
         {
+            _logger.LogInformation("FAA Legacy API: Received command to get health check.");
+
             var response = await _mediator.Send(new GetHealthStatusQuery());
             return new OkObjectResult(response);
         }

@@ -29,6 +29,14 @@ namespace SFA.DAS.FAA.Legacy.Data.UnitTests.Repositories
 
             //assert
             result.Should().Be(HealthCheckResult.UnHealthy);
+            _mockLogger.Verify(l =>
+                l.Log(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((state, type) => state.ToString()!.Contains("Unable to communicate with MongoDb.")),
+                    It.IsAny<Exception>(),
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()!
+                ), Times.AtLeastOnce);
         }
 
         [TestCase("mongodb://xxx-xxx:xxx==@username-xxx-cdb.documents.azure.com:10255/xxxx?ssl=true&replicaSet=globaldb")]
@@ -45,6 +53,14 @@ namespace SFA.DAS.FAA.Legacy.Data.UnitTests.Repositories
 
             //assert
             result.Should().Be(HealthCheckResult.UnHealthy);
+            _mockLogger.Verify(l =>
+                l.Log(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((state, type) => state.ToString()!.Contains("Unable to communicate with MongoDb.")),
+                    It.IsAny<Exception>(),
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()!
+                ), Times.AtLeastOnce);
         }
     }
 }
