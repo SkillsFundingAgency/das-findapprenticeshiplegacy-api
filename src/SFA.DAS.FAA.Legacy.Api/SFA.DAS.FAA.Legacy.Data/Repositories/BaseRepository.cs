@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using SFA.DAS.FAA.Legacy.Data.Concretes;
+using SFA.DAS.FAA.Legacy.Domain.Concretes;
 using SFA.DAS.FAA.Legacy.Domain.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 
@@ -9,17 +11,15 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly IMongoCollection<TEntity> _collection;
-        private readonly IMongoDatabase _database;
+        private readonly IMongoDatabase _mongoDatabase;
 
-        protected BaseRepository(IMongoDbConfiguration settings)
+        protected BaseRepository(IMongoConfiguration mongoConfiguration)
         {
-            var mongoConnectionString = settings.ConnectionString;
+            var mongoConnectionString = mongoConfiguration.AzureCosmosDb;
             var mongoDbName = MongoUrl.Create(mongoConnectionString).DatabaseName;
-
-            _database = new MongoClient(mongoConnectionString)
+            _mongoDatabase = new MongoClient(mongoConnectionString)
                 .GetDatabase(mongoDbName);
-
-            _collection = _database.GetCollection<TEntity>(BaseRepository<TEntity>.GetCollectionName(typeof(TEntity)));
+            _collection = _mongoDatabase.GetCollection<TEntity>(BaseRepository<TEntity>.GetCollectionName(typeof(TEntity)));
         }
 
         private protected static string GetCollectionName(Type documentType)
@@ -28,6 +28,11 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
                     typeof(BsonCollectionAttribute),
                     true)
                 .FirstOrDefault())?.CollectionName;
+        }
+
+        public async Task Ping()
+        {
+            _ = await _mongoDatabase.RunCommandAsync<BsonDocument>(new BsonDocument { { "ping", 1 } });
         }
 
         public virtual IQueryable<TEntity> AsQueryable()

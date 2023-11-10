@@ -6,8 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\Entities\" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MongoDB.Driver" Version="2.10.4" />
+	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Concretes\User\" />
+	</ItemGroup>
 </Project>

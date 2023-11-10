@@ -1,24 +1,20 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using Microsoft.Extensions.Logging;
+using SFA.DAS.FAA.Legacy.Data.User.Entities;
 using SFA.DAS.FAA.Legacy.Domain.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 using SFA.DAS.FAA.Legacy.Domain.Models.HealthStatus;
 
-[assembly: InternalsVisibleTo("SFA.DAS.FAA.Legacy.Data.UnitTests")]
 namespace SFA.DAS.FAA.Legacy.Data.Repositories
 {
-    public class HealthStatusRepository : IHealthStatusRepository
+    public class HealthStatusRepository : BaseRepository<MongoUser>, IHealthStatusRepository
     {
-        private readonly IMongoDbConfiguration _mongoDbConfiguration;
         private readonly ILogger<HealthStatusRepository> _logger;
 
         public HealthStatusRepository(
-            IMongoDbConfiguration mongoDbConfiguration,
-            ILogger<HealthStatusRepository> logger)
+            IMongoConfiguration mongoConfiguration,
+            ILogger<HealthStatusRepository> logger) 
+            : base(mongoConfiguration)
         {
-            _mongoDbConfiguration = mongoDbConfiguration;
             _logger = logger;
         }
 
@@ -26,7 +22,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
         {
             try
             {
-                await IsMongoHealthy();
+                await Ping();
                 return HealthCheckResult.Healthy;
             }
             catch (Exception ex)
@@ -34,17 +30,6 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
                 _logger.LogError("Unable to communicate with MongoDb. Details: {details}", ex.Message);
                 return HealthCheckResult.UnHealthy;
             }
-        }
-        
-        internal async Task IsMongoHealthy()
-        {
-            var url = new MongoUrl(_mongoDbConfiguration.ConnectionString);
-
-            var dbInstance = new MongoClient(url)
-                .GetDatabase(url.DatabaseName)
-                .WithReadPreference(new ReadPreference(ReadPreferenceMode.Secondary));
-
-            _ = await dbInstance.RunCommandAsync<BsonDocument>(new BsonDocument { { "ping", 1 } });
         }
     }
 }

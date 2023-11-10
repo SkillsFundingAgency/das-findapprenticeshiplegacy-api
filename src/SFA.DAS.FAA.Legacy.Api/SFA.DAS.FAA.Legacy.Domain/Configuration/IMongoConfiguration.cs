@@ -1,7 +1,7 @@
 ﻿namespace SFA.DAS.FAA.Legacy.Domain.Configuration
 {
-    public interface IMongoDbConfiguration
+    public interface IMongoConfiguration
     {
-        string ConnectionString { get; set; }
+        string AzureCosmosDb { get; set; }
     }
 }

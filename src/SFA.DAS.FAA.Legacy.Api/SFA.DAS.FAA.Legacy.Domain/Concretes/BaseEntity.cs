@@ -1,6 +1,6 @@
-﻿using SFA.DAS.FAA.Legacy.Data.Interfaces;
+﻿using SFA.DAS.FAA.Legacy.Domain.Interfaces.Entities;
 
-namespace SFA.DAS.FAA.Legacy.Data.Concretes
+namespace SFA.DAS.FAA.Legacy.Domain.Concretes
 {
     public abstract class BaseEntity : IBaseEntity
     {

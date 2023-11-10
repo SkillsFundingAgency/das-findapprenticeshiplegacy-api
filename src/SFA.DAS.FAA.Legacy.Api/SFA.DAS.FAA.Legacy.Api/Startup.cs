@@ -84,8 +84,8 @@ namespace SFA.DAS.FAA.Legacy.Api
                     options.OperationFilter<SwaggerVersionHeaderFilter>();
                 });
 
-            services.Configure<MongoDbConfiguration>(Configuration.GetSection("MongoDbConfiguration"));
-            services.AddSingleton<IMongoDbConfiguration>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoDbConfiguration>>().Value);
+            services.Configure<MongoConfiguration>(Configuration.GetSection("MongoConfiguration"));
+            services.AddSingleton<IMongoConfiguration>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoConfiguration>>().Value);
 
             services.AddApplicationRegistrations();
         }

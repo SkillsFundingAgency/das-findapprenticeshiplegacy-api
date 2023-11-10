@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace SFA.DAS.FAA.Legacy.Data.Interfaces
+namespace SFA.DAS.FAA.Legacy.Domain.Interfaces.Entities
 {
     public interface IBaseEntity
     {
