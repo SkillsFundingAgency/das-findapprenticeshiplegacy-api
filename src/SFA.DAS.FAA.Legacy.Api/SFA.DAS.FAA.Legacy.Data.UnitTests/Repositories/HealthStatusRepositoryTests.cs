@@ -15,7 +15,7 @@ namespace SFA.DAS.FAA.Legacy.Data.UnitTests.Repositories
         private readonly Mock<IMongoConfiguration> _mockConfiguration = new();
         private readonly Mock<IBaseRepository<MongoUser>> _mockBaseRepository = new();
 
-        [TestCase("mongodb://xxx-xxx:xxx==@username-xxx-cdb.documents.azure.com:10255/xxxx?ssl=true&replicaSet=globaldb")]
+        [TestCase("mongodb://xxx-xxx:xxx==@username-xxx-cdb.xxx.azure.com:10255/xxxx")]
         public async Task HealthCheck_GivenInvalid_Connection_Returns_Unhealthy(string dbConnectionString)
         {
             //arrange
@@ -39,7 +39,7 @@ namespace SFA.DAS.FAA.Legacy.Data.UnitTests.Repositories
                 ), Times.AtLeastOnce);
         }
 
-        [TestCase("mongodb://xxx-xxx:xxx==@username-xxx-cdb.documents.azure.com:10255/xxxx?ssl=true&replicaSet=globaldb")]
+        [TestCase("mongodb://xxx-xxx:xxx==@username-xxx-cdb.xxx.azure.com:10255/xxxx")]
         public async Task HealthCheck_GivenException_Returns_Unhealthy(string dbConnectionString)
         {
             //arrange
