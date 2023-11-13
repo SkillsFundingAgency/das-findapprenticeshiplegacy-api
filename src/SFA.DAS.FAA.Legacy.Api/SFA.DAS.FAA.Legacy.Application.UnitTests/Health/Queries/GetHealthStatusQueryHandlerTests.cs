@@ -13,9 +13,9 @@ namespace SFA.DAS.FAA.Legacy.Application.UnitTests.Health.Queries
         [Test]
         [RecursiveMoqAutoData]
         public async Task Handle_GetHealthStatusHandler_ReturnsHealthCheckResult(
+            HealthCheckResult healthCheckResult,
             [Frozen] Mock<IHealthStatusRepository> healthStatusRepositoryMock,
-            GetHealthStatusQueryHandler sut,
-            HealthCheckResult healthCheckResult)
+            [Greedy] GetHealthStatusQueryHandler sut)
         {
             healthStatusRepositoryMock.Setup(a => a.HealthCheck()).ReturnsAsync(healthCheckResult);
 
