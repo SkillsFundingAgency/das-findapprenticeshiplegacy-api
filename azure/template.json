@@ -41,13 +41,13 @@
         "keyVaultCertificateName": {
             "type": "string"
         },
-        "<sharedFrontEndAppServicePlanName> or <sharedBackEndAppServicePlanName>": { //PLACEHOLDER
+        "<sharedBackEndAppServicePlanName>": {
             "type": "string"
         },
-        "<sharedFrontEndSubnetResourceId> or <sharedBackEndSubnetResourceId>": { //PLACEHOLDER
+        "<sharedBackEndSubnetResourceId>": { 
             "type": "string"
         },
-        "<frontEndAccessRestrictions> or <backEndAccessRestrictions>": { //PLACEHOLDER
+        "<backEndAccessRestrictions>": {
             "type": "array"
         },
         "logAnalyticsSubscriptionId": {
@@ -67,7 +67,7 @@
         "resourceNamePrefix": "[toLower(concat('das-', parameters('resourceEnvironmentName'),'-', parameters('serviceName')))]",
         "resourceGroupName": "[concat(variables('resourceNamePrefix'), '-rg')]",
         "appServiceName": "[concat(variables('resourceNamePrefix'), '-as')]",
-        "configNames": "__SolutionBaseName__" //PLACEHOLDER
+        "configNames": "SFA.DAS.FAA.Legacy.Api"
     },
     "resources": [
         {
