@@ -192,6 +192,9 @@
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(variables('appServiceName'), '-app-service-certificate-', parameters('utcValue'))).outputs.certificateThumbprint.value]"
+                    },
+                    "ipSecurityRestrictions": {
+                        "value": "[parameters('backEndAccessRestrictions')]"
                     }
                 }
             },
