@@ -8,12 +8,12 @@
             LastLogin = LastActivity;
         }
 
-        private string _username;
+        private string? _username;
 
-        public string Username
+        public string? Username
         {
-            get { return !string.IsNullOrWhiteSpace(_username) ? _username.ToLower() : null; }
-            set { _username = value; }
+            get => !string.IsNullOrWhiteSpace(_username) ? _username.ToLower() : null;
+            set => _username = value;
         }
 
         public UserStatuses Status { get; set; }
@@ -42,12 +42,12 @@
 
         public DateTime LastActivity { get; set; }
 
-        private string _pendingUsername;
+        private string? _pendingUsername;
 
-        public string PendingUsername
+        public string? PendingUsername
         {
-            get { return !string.IsNullOrWhiteSpace(_pendingUsername) ? _pendingUsername.ToLower() : null; }
-            set { _pendingUsername = value; }
+            get => !string.IsNullOrWhiteSpace(_pendingUsername) ? _pendingUsername.ToLower() : null;
+            set => _pendingUsername = value;
         }
 
         public string PendingUsernameCode { get; set; }

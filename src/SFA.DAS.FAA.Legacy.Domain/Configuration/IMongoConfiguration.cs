@@ -2,6 +2,6 @@
 {
     public interface IMongoConfiguration
     {
-        string AzureCosmosDb { get; set; }
+        string? AzureCosmosDb { get; set; }
     }
 }

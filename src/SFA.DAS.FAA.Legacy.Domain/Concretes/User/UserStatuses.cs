@@ -1,7 +1,5 @@
 ﻿namespace SFA.DAS.FAA.Legacy.Domain.Concretes.User
 {
-    //todo: consider removing "Inactive" state as implementation deletes the user rather than marking as inactive
-    //todo: consider removing "Dormant" as it's a derived state
     public enum UserStatuses
     {
         Unknown = 0,

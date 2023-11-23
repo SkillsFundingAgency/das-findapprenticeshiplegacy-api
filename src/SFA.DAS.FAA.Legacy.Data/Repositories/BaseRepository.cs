@@ -19,15 +19,15 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             var mongoDbName = MongoUrl.Create(mongoConnectionString).DatabaseName;
             _mongoDatabase = new MongoClient(mongoConnectionString)
                 .GetDatabase(mongoDbName);
-            _collection = _mongoDatabase.GetCollection<TEntity>(BaseRepository<TEntity>.GetCollectionName(typeof(TEntity)));
+            _collection = _mongoDatabase.GetCollection<TEntity>(GetCollectionName(typeof(TEntity)));
         }
 
-        private protected static string GetCollectionName(Type documentType)
+        private protected static string? GetCollectionName(Type documentType)
         {
             return ((BsonCollectionAttribute)documentType.GetCustomAttributes(
                     typeof(BsonCollectionAttribute),
                     true)
-                .FirstOrDefault())?.CollectionName;
+                .FirstOrDefault()!).CollectionName;
         }
 
         public async Task Ping()
@@ -80,7 +80,6 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             });
         }
 
-
         public virtual void InsertOne(TEntity document)
         {
             _collection.InsertOne(document);
@@ -95,7 +94,6 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
         {
             _collection.InsertMany(documents);
         }
-
 
         public virtual async Task InsertManyAsync(ICollection<TEntity> documents)
         {
@@ -123,7 +121,6 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
         {
             return Task.Run(() => _collection.FindOneAndDeleteAsync(filterExpression));
         }
-
         public void DeleteById(string id)
         {
             var objectId = new Guid(id);
@@ -149,11 +146,6 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
         public Task DeleteManyAsync(Expression<Func<TEntity, bool>> filterExpression)
         {
             return Task.Run(() => _collection.DeleteManyAsync(filterExpression));
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

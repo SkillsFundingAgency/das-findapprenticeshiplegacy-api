@@ -2,7 +2,7 @@
 
 namespace SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories
 {
-    public interface IBaseRepository<TEntity> : IDisposable where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
         Task Ping();
 

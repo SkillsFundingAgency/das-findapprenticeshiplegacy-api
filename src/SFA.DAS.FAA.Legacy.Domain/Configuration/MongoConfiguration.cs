@@ -2,6 +2,6 @@
 {
     public class MongoConfiguration : IMongoConfiguration
     {
-        public string AzureCosmosDb { get; set; }
+        public string? AzureCosmosDb { get; set; }
     }
 }

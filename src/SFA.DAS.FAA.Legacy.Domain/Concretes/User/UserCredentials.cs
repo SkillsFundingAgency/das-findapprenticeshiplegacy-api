@@ -2,6 +2,6 @@
 {
     public class UserCredentials : BaseEntity
     {
-        public string PasswordHash { get; set; }
+        public string? PasswordHash { get; set; }
     }
 }

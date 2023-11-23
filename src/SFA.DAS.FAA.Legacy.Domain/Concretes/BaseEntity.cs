@@ -10,7 +10,7 @@ namespace SFA.DAS.FAA.Legacy.Domain.Concretes
 
         public DateTime? DateUpdated { get; set; }
 
-        public BaseEntity()
+        protected BaseEntity()
         {
             EntityId = Guid.NewGuid();
             DateCreated = DateTime.UtcNow;
