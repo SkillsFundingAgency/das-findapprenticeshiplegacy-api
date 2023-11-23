@@ -41,13 +41,13 @@
         "keyVaultCertificateName": {
             "type": "string"
         },
-        "<sharedBackEndAppServicePlanName>": {
+        "sharedBackEndAppServicePlanName": {
             "type": "string"
         },
-        "<sharedBackEndSubnetResourceId>": { 
+        "sharedBackEndSubnetResourceId": { 
             "type": "string"
         },
-        "<backEndAccessRestrictions>": {
+        "backEndAccessRestrictions": {
             "type": "array"
         },
         "logAnalyticsSubscriptionId": {
@@ -145,13 +145,13 @@
                         "value": "[variables('appServiceName')]"
                     },
                     "appServicePlanName": {
-                        "value": "[parameters('sharedFrontEndAppServicePlanName')]"
+                        "value": "[parameters('sharedBackEndAppServicePlanName')]"
                     },
                     "appServicePlanResourceGroup": {
                         "value": "[parameters('sharedEnvResourceGroup')]"
                     },
                     "subnetResourceId": {
-                        "value": "[parameters('sharedFrontEndSubnetResourceId')]"
+                        "value": "[parameters('sharedBackEndSubnetResourceId')]"
                     },
                     "appServiceAppSettings": {
                         "value": {
