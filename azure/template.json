@@ -41,9 +41,6 @@
         "keyVaultCertificateName": {
             "type": "string"
         },
-        "<backEndAccessRestrictions>": {
-            "type": "array"
-        },
         "logAnalyticsSubscriptionId": {
             "type": "string",
             "defaultValue": "[subscription().subscriptionId]"
@@ -186,9 +183,6 @@
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(variables('appServiceName'), '-app-service-certificate-', parameters('utcValue'))).outputs.certificateThumbprint.value]"
-                    },
-                    "ipSecurityRestrictions": {
-                        "value": "[parameters('<backEndAccessRestrictions>')]"
                     }
                 }
             },
