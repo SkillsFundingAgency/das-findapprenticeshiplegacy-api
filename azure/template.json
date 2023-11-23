@@ -41,12 +41,6 @@
         "keyVaultCertificateName": {
             "type": "string"
         },
-        "<sharedBackEndAppServicePlanName>": {
-            "type": "string"
-        },
-        "<sharedBackEndSubnetResourceId>": { 
-            "type": "string"
-        },
         "<backEndAccessRestrictions>": {
             "type": "array"
         },
