@@ -1,0 +1,19 @@
+﻿using MediatR;
+using SFA.DAS.FAA.Legacy.Application.Mediatr.Responses;
+using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
+
+namespace SFA.DAS.FAA.Legacy.Application.User.Queries
+{
+    public class GetUserByEmailHandler : IRequestHandler<GetUserByEmailQuery, ValidatedResponse<GetUserByEmailResult>>
+    {
+        private readonly IUserReadRepository _userReadRepository;
+
+        public GetUserByEmailHandler(IUserReadRepository userReadRepository) => _userReadRepository = userReadRepository;
+
+        public async Task<ValidatedResponse<GetUserByEmailResult>> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
+        {
+            var user = await _userReadRepository.Get(request.email);
+            return new ValidatedResponse<GetUserByEmailResult>(user);
+        }
+    }
+}
