@@ -16,8 +16,8 @@ namespace SFA.DAS.FAA.Legacy.Application.UnitTests.User.Queries.GetUserByEmail
             GetUserByEmailHandler sut,
             MongoUser user)
         {
-            userReadRepositoryMock.Setup(a => a.Get(user.Username)).Returns(user);
-            var result = await sut.Handle(new GetUserByEmailQuery(user.Username), new CancellationToken());
+            userReadRepositoryMock.Setup(a => a.Get(user.Username!)).Returns(user);
+            var result = await sut.Handle(new GetUserByEmailQuery(user.Username!), new CancellationToken());
             result.Result.Should().BeEquivalentTo(user, c => c.ExcludingMissingMembers());
         }
 

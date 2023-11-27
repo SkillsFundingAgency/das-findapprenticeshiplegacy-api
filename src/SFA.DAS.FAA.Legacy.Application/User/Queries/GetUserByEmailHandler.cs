@@ -10,13 +10,13 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
 
         public GetUserByEmailHandler(IUserReadRepository userReadRepository) => _userReadRepository = userReadRepository;
 
-        public async Task<ValidatedResponse<GetUserByEmailResult>> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
+        public Task<ValidatedResponse<GetUserByEmailResult>> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
         {
             var user = _userReadRepository.Get(request.Email);
 
-            return user is null 
+            return Task.FromResult(user is null 
                 ? ValidatedResponse<GetUserByEmailResult>.EmptySuccessResponse() 
-                : new ValidatedResponse<GetUserByEmailResult>(user);
+                : new ValidatedResponse<GetUserByEmailResult>(user));
         }
     }
 }
