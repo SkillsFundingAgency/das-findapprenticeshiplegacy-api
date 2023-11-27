@@ -34,7 +34,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             catch (Exception ex)
             {
                 _logger.LogError($"Called MongoDb but Un-able to get the user with username={username}");
-                _logger.LogError(ex.Message);
+                _logger.LogError("Unable to communicate with MongoDb. Details: {details}", ex.Message);
                 throw;
             }
         }

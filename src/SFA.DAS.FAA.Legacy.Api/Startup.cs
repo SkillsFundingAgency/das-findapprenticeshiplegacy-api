@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using SFA.DAS.Api.Common.AppStart;
+using SFA.DAS.Api.Common.Configuration;
 using SFA.DAS.Api.Common.Infrastructure;
 using SFA.DAS.Configuration.AzureTableStorage;
 using SFA.DAS.FAA.Legacy.Application.Extensions;
@@ -47,6 +49,20 @@ namespace SFA.DAS.FAA.Legacy.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            if (!IsEnvironmentLocalOrDev)
+            {
+                var azureAdConfiguration = Configuration
+                    .GetSection("AzureAd")
+                    .Get<AzureActiveDirectoryConfiguration>();
+
+                var policies = new Dictionary<string, string>
+                {
+                    { "default", "faalgyapi" }
+                };
+
+                services.AddAuthentication(azureAdConfiguration, policies);
+            }
+
             services.AddHealthChecks();
 
             services.AddApplicationInsightsTelemetry();
