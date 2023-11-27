@@ -9,6 +9,7 @@ using SFA.DAS.Api.Common.Infrastructure;
 using SFA.DAS.Configuration.AzureTableStorage;
 using SFA.DAS.FAA.Legacy.Application.Extensions;
 using SFA.DAS.FAA.Legacy.Domain.Configuration;
+using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 

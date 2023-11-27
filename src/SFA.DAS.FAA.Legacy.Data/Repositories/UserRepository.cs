@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
+using SFA.DAS.FAA.Legacy.Data.Mapper;
 using SFA.DAS.FAA.Legacy.Data.User.Entities;
-using SFA.DAS.FAA.Legacy.Domain.Configuration;
+using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
-using User = SFA.DAS.FAA.Legacy.Domain.Concretes.User.User;
-
 
 namespace SFA.DAS.FAA.Legacy.Data.Repositories
 {
@@ -20,22 +19,24 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             _logger = logger;
         }
 
-        public async Task<Domain.Concretes.User.User> Get(string username)
+        public Domain.Models.User.User? Get(string username)
         {
-            _logger.LogInformation($"Called Mongodb to get user with username={username}");
-
-            var mongoUser = FilterBy(
-                fil => fil.Username == username.ToLower(),
-                Builders<MongoUser>.Sort.Ascending(fil => fil.Status))
-                .FirstOrDefault();
-
-            if (mongoUser is null)
+            try
             {
-                _logger.LogInformation($"Unknown username:{username}");
-                return null;
+                _logger.LogInformation($"Called Mongodb to get user with username={username}");
+
+                var mongoUser = FilterBy(
+                    fil => fil.Username == username.ToLower(),
+                    Builders<MongoUser>.Sort.Ascending(fil => fil.Status));
+
+                return mongoUser.FirstOrDefault()?.ConvertToUser();
             }
-            
-            return new Domain.Concretes.User.User();
+            catch (Exception ex)
+            {
+                _logger.LogError($"Called MongoDb but Un-able to get the user with username={username}");
+                _logger.LogError(ex.Message);
+                throw;
+            }
         }
     }
 }

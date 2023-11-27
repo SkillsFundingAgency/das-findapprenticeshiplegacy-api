@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using SFA.DAS.FAA.Legacy.Data.Repositories;
 using SFA.DAS.FAA.Legacy.Data.User.Entities;
-using SFA.DAS.FAA.Legacy.Domain.Configuration;
+using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 using SFA.DAS.FAA.Legacy.Domain.Models.HealthStatus;
 

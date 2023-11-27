@@ -1,18 +1,17 @@
 ﻿namespace SFA.DAS.FAA.Legacy.Data.User.Entities
 {
-    using Domain.Concretes.User;
     using MongoDB.Bson.Serialization.Attributes;
-    using SFA.DAS.FAA.Legacy.Data.Concretes;
+    using Concretes;
     using System;
 
     [BsonCollection("users")]
-    public class MongoUser : User
+    public class MongoUser : Domain.Models.User.User
     {
         [BsonId]
         public Guid Id
         {
-            get { return EntityId; }
-            set { EntityId = value; }
+            get => EntityId;
+            set => EntityId = value;
         }
     }
 }

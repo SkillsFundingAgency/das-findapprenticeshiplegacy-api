@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using SFA.DAS.FAA.Legacy.Data.Concretes;
 using SFA.DAS.FAA.Legacy.Domain.Concretes;
-using SFA.DAS.FAA.Legacy.Domain.Configuration;
+using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 
 namespace SFA.DAS.FAA.Legacy.Data.Repositories

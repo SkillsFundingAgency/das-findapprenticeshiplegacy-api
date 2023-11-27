@@ -1,4 +1,6 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Concretes.User
+﻿using SFA.DAS.FAA.Legacy.Domain.Concretes;
+
+namespace SFA.DAS.FAA.Legacy.Domain.Models.User
 {
     public class User : BaseEntity
     {

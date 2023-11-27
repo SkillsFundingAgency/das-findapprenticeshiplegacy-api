@@ -1,4 +1,4 @@
-﻿using SFA.DAS.FAA.Legacy.Domain.Concretes.User;
+﻿using SFA.DAS.FAA.Legacy.Domain.Models.User;
 
 namespace SFA.DAS.FAA.Legacy.Application.User.Queries
 {
@@ -36,11 +36,8 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
        
         public string? PendingUsernameCode { get; set; }
 
-        public static implicit operator GetUserByEmailResult?(Domain.Concretes.User.User? user)
+        public static implicit operator GetUserByEmailResult(Domain.Models.User.User user)
         {
-            if (user is null)
-                return null;
-
             GetUserByEmailResult getUserByEmailResult = new()
             {
                 Username = user.Username,

@@ -1,4 +1,6 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Configuration
+﻿using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
+
+namespace SFA.DAS.FAA.Legacy.Domain.Configuration
 {
     public class MongoConfiguration : IMongoConfiguration
     {

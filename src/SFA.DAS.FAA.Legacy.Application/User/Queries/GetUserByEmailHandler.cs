@@ -12,8 +12,11 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
 
         public async Task<ValidatedResponse<GetUserByEmailResult>> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userReadRepository.Get(request.email);
-            return new ValidatedResponse<GetUserByEmailResult>(user);
+            var user = _userReadRepository.Get(request.Email);
+
+            return user is null 
+                ? ValidatedResponse<GetUserByEmailResult>.EmptySuccessResponse() 
+                : new ValidatedResponse<GetUserByEmailResult>(user);
         }
     }
 }

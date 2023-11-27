@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SFA.DAS.FAA.Legacy.Api.Common;
-using SFA.DAS.FAA.Legacy.Application.Health.Queries;
 using SFA.DAS.FAA.Legacy.Application.User.Queries;
 
 namespace SFA.DAS.FAA.Legacy.Api.Controllers
@@ -23,7 +22,9 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
 
         [HttpGet]
         [Route("/{email}")]
-        [ProducesResponseType(typeof(GetHealthStatusResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(GetUserByEmailResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(string email)
         {
             _logger.LogInformation($"FAA Legacy API: Received command to get user by email: {email}.");

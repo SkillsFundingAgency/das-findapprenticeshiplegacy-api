@@ -11,6 +11,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Concretes\User\" />
+	  <Folder Include="Models\User\" />
 	</ItemGroup>
 </Project>

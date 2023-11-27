@@ -1,4 +1,4 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Concretes.User
+﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.User
 {
     [Flags]
     public enum UserRoles
