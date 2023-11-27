@@ -23,7 +23,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
         {
             try
             {
-                _logger.LogInformation($"Called Mongodb to get user with username={username}");
+                _logger.LogInformation("Called Mongodb to get user with username={username}", username);
 
                 var mongoUser = FilterBy(
                     fil => fil.Username == username.ToLower(),
@@ -33,7 +33,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Called MongoDb but Un-able to get the user with username={username}");
+                _logger.LogError("Called MongoDb but Un-able to get the user with username={username}", username);
                 _logger.LogError("Unable to communicate with MongoDb. Details: {details}", ex.Message);
                 throw;
             }

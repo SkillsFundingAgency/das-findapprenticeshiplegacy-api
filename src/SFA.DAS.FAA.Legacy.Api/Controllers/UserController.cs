@@ -27,7 +27,7 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
         [ProducesResponseType(typeof(GetUserByEmailResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(string email)
         {
-            _logger.LogInformation($"FAA Legacy API: Received command to get user by email: {email}.");
+            _logger.LogInformation("FAA Legacy API: Received command to get user by email: {email}", email);
 
             var response = await _mediator.Send(new GetUserByEmailQuery(email));
 

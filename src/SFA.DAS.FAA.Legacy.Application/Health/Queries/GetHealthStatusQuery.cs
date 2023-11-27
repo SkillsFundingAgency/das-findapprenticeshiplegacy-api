@@ -2,5 +2,8 @@
 
 namespace SFA.DAS.FAA.Legacy.Application.Health.Queries
 {
-    public record GetHealthStatusQuery : IRequest<GetHealthStatusResult>;
+    public record GetHealthStatusQuery : IRequest<GetHealthStatusResult>
+    {
+
+    }
 }
