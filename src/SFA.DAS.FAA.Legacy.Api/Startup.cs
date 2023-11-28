@@ -14,6 +14,8 @@ using SFA.DAS.FAA.Legacy.Domain.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using SFA.DAS.FAA.Legacy.Api.HealthCheck;
 
 namespace SFA.DAS.FAA.Legacy.Api
 {
@@ -63,7 +65,8 @@ namespace SFA.DAS.FAA.Legacy.Api
                 services.AddAuthentication(azureAdConfiguration, policies);
             }
 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                .AddCheck<MongoHealthCheck>("Mongo Connection Health Check", failureStatus:HealthStatus.Unhealthy, tags:new[]{"ready"});
 
             services.AddApplicationInsightsTelemetry();
 
@@ -118,6 +121,21 @@ namespace SFA.DAS.FAA.Legacy.Api
                 options.RoutePrefix = string.Empty;
             });
 
+            app.UseHealthChecks("/health", new HealthCheckOptions
+            {
+                ResponseWriter = HealthCheckResponseWriter.WriteJsonResponse
+            });
+            
+            app.UseHealthChecks("/ping", new HealthCheckOptions
+            {
+                Predicate = (_) => false,
+                ResponseWriter = (context, report) => 
+                {
+                    context.Response.ContentType = "application/json";
+                    return context.Response.WriteAsync("");
+                }
+            });
+            
             app.UseHttpsRedirection();
             app.UseRouting();
 

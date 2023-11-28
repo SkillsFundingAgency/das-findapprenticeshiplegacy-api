@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 
 src/SFA.DAS.FAA.Legacy.Api/.idea/.idea.SFA.DAS.FAA.Legacy.Api/.idea/
+
+src/.idea/.idea.SFA.DAS.FAA.Legacy.Api/.idea/
