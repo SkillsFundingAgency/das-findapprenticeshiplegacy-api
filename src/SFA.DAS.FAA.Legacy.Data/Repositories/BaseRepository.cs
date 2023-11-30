@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics.CodeAnalysis;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using SFA.DAS.FAA.Legacy.Data.Concretes;
@@ -8,6 +8,7 @@ using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 
 namespace SFA.DAS.FAA.Legacy.Data.Repositories
 {
+    [ExcludeFromCodeCoverage]
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly IMongoCollection<TEntity> _collection;
