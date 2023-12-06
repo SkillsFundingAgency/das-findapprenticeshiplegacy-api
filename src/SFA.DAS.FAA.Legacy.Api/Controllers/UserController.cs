@@ -21,7 +21,7 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
         }
 
         [HttpGet]
-        [Route("/{email}")]
+        [Route("{email}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetUserByEmailResult), StatusCodes.Status200OK)]
