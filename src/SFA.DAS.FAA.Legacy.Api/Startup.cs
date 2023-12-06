@@ -59,7 +59,7 @@ namespace SFA.DAS.FAA.Legacy.Api
 
                 var policies = new Dictionary<string, string>
                 {
-                    { "default", "faalgyapi" }
+                    { "default", "" }
                 };
 
                 services.AddAuthentication(azureAdConfiguration, policies);
