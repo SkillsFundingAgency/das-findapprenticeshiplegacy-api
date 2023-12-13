@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using SFA.DAS.FAA.Legacy.Data.Concretes;
 using SFA.DAS.FAA.Legacy.Domain.Concretes;
-using SFA.DAS.FAA.Legacy.Domain.Configuration;
+using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 
 namespace SFA.DAS.FAA.Legacy.Data.Repositories
@@ -34,6 +35,15 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
         public async Task Ping()
         {
             _ = await _mongoDatabase.RunCommandAsync<BsonDocument>(new BsonDocument { { "ping", 1 } });
+        }
+
+        public virtual IEnumerable<TEntity> FilterBy(
+            Expression<Func<TEntity, bool>> filterExpression, SortDefinition<TEntity> sortDefinition)
+        {
+            return _collection
+                .Find(filterExpression)
+                .Sort(sortDefinition)
+                .ToEnumerable();
         }
     }
 }

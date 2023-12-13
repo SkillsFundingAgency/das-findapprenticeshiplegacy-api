@@ -11,6 +11,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Extensions
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddTransient<IHealthStatusRepository, HealthStatusRepository>();
+            services.AddTransient<IUserReadRepository, UserRepository>();
 
             return services;
         }

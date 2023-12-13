@@ -1,4 +1,6 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Concretes.User
+﻿using SFA.DAS.FAA.Legacy.Domain.Concretes;
+
+namespace SFA.DAS.FAA.Legacy.Domain.Models.User
 {
     public class User : BaseEntity
     {
@@ -20,7 +22,7 @@
 
         public UserRoles Roles { get; set; }
 
-        public string ActivationCode { get; set; }
+        public string? ActivationCode { get; set; }
 
         public DateTime? ActivateCodeExpiry { get; set; }
 
@@ -28,13 +30,14 @@
 
         public int LoginIncorrectAttempts { get; set; }
 
-        public string PasswordResetCode { get; set; }
+        public string? PasswordResetCode { get; set; }
 
         public DateTime? PasswordResetCodeExpiry { get; set; }
 
+
         public int PasswordResetIncorrectAttempts { get; set; }
 
-        public string AccountUnlockCode { get; set; }
+        public string? AccountUnlockCode { get; set; }
 
         public DateTime? AccountUnlockCodeExpiry { get; set; }
 
@@ -50,6 +53,6 @@
             set => _pendingUsername = value;
         }
 
-        public string PendingUsernameCode { get; set; }
+        public string? PendingUsernameCode { get; set; }
     }
 }

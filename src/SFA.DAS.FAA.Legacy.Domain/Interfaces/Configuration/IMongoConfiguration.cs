@@ -1,4 +1,4 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Configuration
+﻿namespace SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration
 {
     public interface IMongoConfiguration
     {
