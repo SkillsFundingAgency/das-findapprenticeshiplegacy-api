@@ -12,6 +12,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Extensions
         {
             services.AddTransient<IHealthStatusRepository, HealthStatusRepository>();
             services.AddTransient<IUserReadRepository, UserRepository>();
+            services.AddTransient<IApprenticeshipsReadRepository, ApprenticeshipsRepository>();
 
             return services;
         }

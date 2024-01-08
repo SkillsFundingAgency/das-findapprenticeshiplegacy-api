@@ -24,7 +24,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             _collection = _mongoDatabase.GetCollection<TEntity>(GetCollectionName(typeof(TEntity)));
         }
 
-        private protected static string? GetCollectionName(Type documentType)
+        private static string? GetCollectionName(Type documentType)
         {
             return ((BsonCollectionAttribute)documentType.GetCustomAttributes(
                     typeof(BsonCollectionAttribute),
@@ -38,7 +38,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
         }
 
         public virtual IEnumerable<TEntity> FilterBy(
-            Expression<Func<TEntity, bool>> filterExpression, SortDefinition<TEntity> sortDefinition)
+            Expression<Func<TEntity, bool>> filterExpression, SortDefinition<TEntity>? sortDefinition = null)
         {
             return _collection
                 .Find(filterExpression)
