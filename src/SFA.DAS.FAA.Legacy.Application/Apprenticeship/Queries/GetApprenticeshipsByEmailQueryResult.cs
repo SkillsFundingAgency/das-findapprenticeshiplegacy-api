@@ -11,26 +11,26 @@ public record GetApprenticeshipsByEmailQueryResult
 
 public record ApprenticeshipResult
 {
-    public VacancyStatuses VacancyStatus { get; init; }
-    public ApplicationStatuses Status { get; init; }
-    public DateTime? DateApplied { get; init; }
-    public DateTime? DateCreated { get; init; }
-    public DateTime? DateUpdated { get; init; }
-    public DateTime? SuccessfulDateTime { get; init; }
-    public DateTime? UnsuccessfulDateTime { get; init; }
-    public DateTime? DateLastViewed { get; init; }
-    public bool IsArchived { get; set; }
-    public int LegacyApplicationId { get; init; }
-    public string? AdditionalQuestion1Answer { get; init; }
-    public string? AdditionalQuestion2Answer { get; init; }
-    public string? Notes { get; init; }
-    public string? UnsuccessfulReason { get; init; }
-    public string? WithdrawnOrDeclinedReason { get; init; }
-    public List<string>? Skills { get; init; }
-    public Guid CandidateId { get; init; }
-    public RegistrationDetails? CandidateDetails { get; init; }
-    public ApplicationTemplate? CandidateInformation { get; init; }
-    public VacancyDetail? Vacancy { get; init; }
+    public VacancyStatuses VacancyStatus { get; private init; }
+    public ApplicationStatuses Status { get; private init; }
+    public DateTime? DateApplied { get; private init; }
+    public DateTime? DateCreated { get; private init; }
+    public DateTime? DateUpdated { get; private init; }
+    public DateTime? SuccessfulDateTime { get; private init; }
+    public DateTime? UnsuccessfulDateTime { get; private init; }
+    public DateTime? DateLastViewed { get; private init; }
+    public bool IsArchived { get; private init; }
+    public int LegacyApplicationId { get; private init; }
+    public string? AdditionalQuestion1Answer { get; private init; }
+    public string? AdditionalQuestion2Answer { get; private init; }
+    public string? Notes { get; private init; }
+    public string? UnsuccessfulReason { get; private init; }
+    public string? WithdrawnOrDeclinedReason { get; private init; }
+    public List<string>? Skills { get; private init; }
+    public Guid CandidateId { get; private init; }
+    public RegistrationDetails? CandidateDetails { get; private init; }
+    public ApplicationTemplate? CandidateInformation { get; private init; }
+    public VacancyDetail? Vacancy { get; private init; }
 
     public static implicit operator ApprenticeshipResult(Domain.Models.Application.Apprenticeship source)
     {
