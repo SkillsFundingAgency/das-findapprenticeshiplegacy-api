@@ -1,10 +1,9 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship
+﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship;
+
+public enum DisabilityStatus
 {
-    public enum DisabilityStatus
-    {
-        Unknown,
-        Yes,
-        No,
-        PreferNotToSay,
-    }
+    Unknown,
+    Yes,
+    No,
+    PreferNotToSay,
 }

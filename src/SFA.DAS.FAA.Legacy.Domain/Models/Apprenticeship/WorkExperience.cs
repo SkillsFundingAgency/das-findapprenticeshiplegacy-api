@@ -1,15 +1,14 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship
+﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship;
+
+public record WorkExperience
 {
-    public record WorkExperience
-    {
-        public string? Employer { get; set; }
+    public string? Employer { get; set; }
 
-        public string? JobTitle { get; set; }
+    public string? JobTitle { get; set; }
 
-        public string? Description { get; set; }
+    public string? Description { get; set; }
 
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
-    }
+    public DateTime ToDate { get; set; }
 }

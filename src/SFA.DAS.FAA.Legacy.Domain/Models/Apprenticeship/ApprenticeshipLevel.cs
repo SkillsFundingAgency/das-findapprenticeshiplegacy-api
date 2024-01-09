@@ -1,11 +1,10 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship
+﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship;
+
+public enum ApprenticeshipLevel
 {
-    public enum ApprenticeshipLevel
-    {
-        Unknown = 0,
-        Intermediate,
-        Advanced,
-        Higher,
-        Degree
-    }
+    Unknown = 0,
+    Intermediate,
+    Advanced,
+    Higher,
+    Degree
 }

@@ -1,9 +1,8 @@
-﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship
+﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship;
+
+public enum VacancyLocationType
 {
-    public enum VacancyLocationType
-    {
-        Unknown,
-        NonNational,
-        National,
-    }
+    Unknown,
+    NonNational,
+    National,
 }
