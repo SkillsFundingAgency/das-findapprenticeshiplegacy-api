@@ -1,8 +1,8 @@
 ﻿namespace SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship
 {
-    public class Education
+    public record Education
     {
-        public string Institution { get; set; }
+        public string? Institution { get; set; }
 
         public int FromYear { get; set; }
 

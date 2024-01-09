@@ -7,14 +7,14 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApprenticeshipsController : ActionResponseControllerBase
+    public class ApprenticeshipController : ActionResponseControllerBase
     {
-        private readonly ILogger<ApprenticeshipsController> _logger;
+        private readonly ILogger<ApprenticeshipController> _logger;
         private readonly IMediator _mediator;
 
-        public override string ControllerName => "Apprenticeships";
+        public override string ControllerName => "apprenticeship";
 
-        public ApprenticeshipsController(ILogger<ApprenticeshipsController> logger, IMediator mediator)
+        public ApprenticeshipController(ILogger<ApprenticeshipController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;

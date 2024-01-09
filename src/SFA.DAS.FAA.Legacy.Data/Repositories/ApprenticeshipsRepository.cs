@@ -18,15 +18,15 @@ namespace SFA.DAS.FAA.Legacy.Data.Repositories
             _logger = logger;
         }
 
-        public IEnumerable<Domain.Models.Application.Apprenticeships> Get(string username)
+        public IEnumerable<Domain.Models.Application.Apprenticeship> Get(string username)
         {
             try
             {
                 _logger.LogInformation("Called Mongodb to get apprenticeship for username={username}", username);
 
-                var mongoApprenticeships = FilterBy(fil => fil.CandidateDetails.EmailAddress == username.ToLower()).ToList();
+                var mongoApprenticeships = FilterBy(fil => fil.CandidateDetails.EmailAddress == username.ToLower());
 
-                return mongoApprenticeships.Select(apprenticeship => apprenticeship.ConvertToApprenticeship()).ToList();
+                return mongoApprenticeships.Select(apprenticeship => apprenticeship.ConvertToApprenticeship());
             }
             catch (Exception ex)
             {

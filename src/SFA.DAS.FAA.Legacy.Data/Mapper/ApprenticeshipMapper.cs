@@ -4,9 +4,9 @@ namespace SFA.DAS.FAA.Legacy.Data.Mapper
 {
     public static class ApprenticeshipMapper
     {
-        public static Domain.Models.Application.Apprenticeships ConvertToApprenticeship(this MongoApprenticeships mongoApprenticeships)
+        public static Domain.Models.Application.Apprenticeship ConvertToApprenticeship(this MongoApprenticeships mongoApprenticeships)
         {
-            return new Domain.Models.Application.Apprenticeships
+            return new Domain.Models.Application.Apprenticeship
             {
                 Status = mongoApprenticeships.Status,
                 AdditionalQuestion1Answer = mongoApprenticeships.AdditionalQuestion1Answer,
@@ -19,6 +19,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Mapper
                 VacancyStatus = mongoApprenticeships.VacancyStatus,
                 DateUpdated = mongoApprenticeships.DateUpdated,
                 DateApplied = mongoApprenticeships.DateApplied,
+                IsArchived = mongoApprenticeships.IsArchived,
                 CandidateDetails = mongoApprenticeships.CandidateDetails,
                 WithdrawnOrDeclinedReason = mongoApprenticeships.WithdrawnOrDeclinedReason,
                 Vacancy = mongoApprenticeships.Vacancy,

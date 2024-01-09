@@ -5,7 +5,7 @@
     using System;
 
     [BsonCollection("apprenticeships")]
-    public class MongoApprenticeships : Domain.Models.Application.Apprenticeships
+    public class MongoApprenticeships : Domain.Models.Application.Apprenticeship
     {
         [BsonId]
         public Guid Id

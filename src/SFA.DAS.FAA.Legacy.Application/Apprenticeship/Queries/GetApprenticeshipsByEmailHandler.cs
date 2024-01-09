@@ -1,25 +1,25 @@
 ﻿using MediatR;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 
-namespace SFA.DAS.FAA.Legacy.Application.Apprenticeship.Queries
+namespace SFA.DAS.FAA.Legacy.Application.Apprenticeship.Queries;
+
+public class GetApprenticeshipsByEmailHandler : IRequestHandler<GetApprenticeshipsByEmailQuery, GetApprenticeshipsByEmailQueryResult>
 {
-    public class GetApprenticeshipsByEmailHandler : IRequestHandler<GetApprenticeshipsByEmailQuery, GetApprenticeshipsByEmailQueryResult>
+    private readonly IApprenticeshipsReadRepository _apprenticeshipsReadRepository;
+
+    public GetApprenticeshipsByEmailHandler(IApprenticeshipsReadRepository apprenticeshipsReadRepository)
     {
-        private readonly IApprenticeshipsReadRepository _apprenticeshipsReadRepository;
+        _apprenticeshipsReadRepository = apprenticeshipsReadRepository;
+    }
 
-        public GetApprenticeshipsByEmailHandler(IApprenticeshipsReadRepository apprenticeshipsReadRepository)
+    public Task<GetApprenticeshipsByEmailQueryResult> Handle(GetApprenticeshipsByEmailQuery request, CancellationToken cancellationToken)
+    {
+        var apprenticeships = _apprenticeshipsReadRepository.Get(request.Email).ToList();
+
+        return Task.FromResult(new GetApprenticeshipsByEmailQueryResult
         {
-            _apprenticeshipsReadRepository = apprenticeshipsReadRepository;
-        }
-
-        public Task<GetApprenticeshipsByEmailQueryResult> Handle(GetApprenticeshipsByEmailQuery request, CancellationToken cancellationToken)
-        {
-            var apprenticeships = _apprenticeshipsReadRepository.Get(request.Email);
-
-            return Task.FromResult(new GetApprenticeshipsByEmailQueryResult
-            {
-                ApprenticeshipResults = apprenticeships.Select(app => (ApprenticeshipResult)app).ToList()
-            });
-        }
+            Count = apprenticeships.Count,
+            Apprenticeships = apprenticeships.Select(app => (ApprenticeshipResult)app).ToList(),
+        });
     }
 }
