@@ -8,7 +8,7 @@ namespace SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories
         Task Ping();
 
         IEnumerable<TEntity> FilterBy(
-            Expression<Func<TEntity, bool>> filterExpression, SortDefinition<TEntity> sortDefinition);
+            Expression<Func<TEntity, bool>> filterExpression, SortDefinition<TEntity>? sortDefinition = null);
         
     }
 }

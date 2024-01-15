@@ -4,41 +4,41 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
 {
     public class GetUserByEmailResult
     {
-        public string? Username { get; set; }
+        public string? Username { get; init; }
 
-        public UserStatuses Status { get; set; }
+        public UserStatuses Status { get; init; }
 
-        public UserRoles Roles { get; set; }
+        public UserRoles Roles { get; init; }
 
-        public string? ActivationCode { get; set; }
+        public string? ActivationCode { get; init; }
 
-        public DateTime? ActivateCodeExpiry { get; set; }
+        public DateTime? ActivateCodeExpiry { get; init; }
 
-        public DateTime? ActivationDate { get; set; }
+        public DateTime? ActivationDate { get; init; }
 
-        public int LoginIncorrectAttempts { get; set; }
+        public int LoginIncorrectAttempts { get; init; }
 
-        public string? PasswordResetCode { get; set; }
+        public string? PasswordResetCode { get; init; }
 
-        public DateTime? PasswordResetCodeExpiry { get; set; }
+        public DateTime? PasswordResetCodeExpiry { get; init; }
 
-        public int PasswordResetIncorrectAttempts { get; set; }
+        public int PasswordResetIncorrectAttempts { get; init; }
 
-        public string? AccountUnlockCode { get; set; }
+        public string? AccountUnlockCode { get; init; }
 
-        public DateTime? AccountUnlockCodeExpiry { get; set; }
+        public DateTime? AccountUnlockCodeExpiry { get; init; }
 
-        public DateTime? LastLogin { get; set; }
+        public DateTime? LastLogin { get; init; }
 
-        public DateTime LastActivity { get; set; }
+        public DateTime LastActivity { get; init; }
 
-        public string? PendingUsername { get; set; }
+        public string? PendingUsername { get; init; }
        
-        public string? PendingUsernameCode { get; set; }
+        public string? PendingUsernameCode { get; init; }
 
         public static implicit operator GetUserByEmailResult(Domain.Models.User.User user)
         {
-            GetUserByEmailResult getUserByEmailResult = new()
+            return new GetUserByEmailResult
             {
                 Username = user.Username,
                 AccountUnlockCode = user.AccountUnlockCode,
@@ -57,8 +57,6 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
                 Roles = user.Roles,
                 Status = user.Status
             };
-
-            return getUserByEmailResult;
         }
     }
 }
