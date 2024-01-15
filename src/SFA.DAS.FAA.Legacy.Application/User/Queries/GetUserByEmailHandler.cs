@@ -1,21 +1,24 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using SFA.DAS.FAA.Legacy.Application.Mediatr.Responses;
 using SFA.DAS.FAA.Legacy.Domain.Interfaces.Repositories;
 
 namespace SFA.DAS.FAA.Legacy.Application.User.Queries
 {
-    public class GetUserByEmailHandler : IRequestHandler<GetUserByEmailQuery, ValidatedResponse<GetUserByEmailResult>>
+    public class GetUserByEmailHandler(
+        IUserReadRepository userReadRepository,
+        IValidator<GetUserByEmailQuery> validator)
+        : IRequestHandler<GetUserByEmailQuery, ValidatedResponse<GetUserByEmailResult>>
     {
-        private readonly IUserReadRepository _userReadRepository;
-
-        public GetUserByEmailHandler(IUserReadRepository userReadRepository) => _userReadRepository = userReadRepository;
-
-        public Task<ValidatedResponse<GetUserByEmailResult>> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
+        public Task<ValidatedResponse<GetUserByEmailResult>> Handle(GetUserByEmailQuery request,
+            CancellationToken cancellationToken)
         {
-            var user = _userReadRepository.Get(request.Email);
+            validator.ValidateAndThrow(request);
 
-            return Task.FromResult(user is null 
-                ? ValidatedResponse<GetUserByEmailResult>.EmptySuccessResponse() 
+            var user = userReadRepository.Get(request.Email);
+
+            return Task.FromResult(user is null
+                ? ValidatedResponse<GetUserByEmailResult>.EmptySuccessResponse()
                 : new ValidatedResponse<GetUserByEmailResult>(user));
         }
     }

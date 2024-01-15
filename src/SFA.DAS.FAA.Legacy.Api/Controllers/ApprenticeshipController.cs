@@ -7,18 +7,10 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApprenticeshipController : ActionResponseControllerBase
+    public class ApprenticeshipController(ILogger<ApprenticeshipController> logger, IMediator mediator)
+        : ActionResponseControllerBase
     {
-        private readonly ILogger<ApprenticeshipController> _logger;
-        private readonly IMediator _mediator;
-
-        public override string ControllerName => "apprenticeship";
-
-        public ApprenticeshipController(ILogger<ApprenticeshipController> logger, IMediator mediator)
-        {
-            _logger = logger;
-            _mediator = mediator;
-        }
+        protected override string ControllerName => "apprenticeship";
 
         [HttpGet]
         [Route("{email}")]
@@ -27,11 +19,12 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
         [ProducesResponseType(typeof(GetApprenticeshipsByEmailQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(string email)
         {
-            _logger.LogInformation("FAA Legacy API: Received command to get all apprenticeships by user email: {email}", email);
+            logger.LogInformation("FAA Legacy API: Received command to get all apprenticeships by user email: {email}",
+                email);
 
-            var response = await _mediator.Send(new GetApprenticeshipsByEmailQuery(email));
+            var response = await mediator.Send(new GetApprenticeshipsByEmailQuery(email));
 
-            return Ok(response);
+            return GetResponse(response);
         }
     }
 }
