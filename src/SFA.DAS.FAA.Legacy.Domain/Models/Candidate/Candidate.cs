@@ -1,38 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SFA.DAS.FAA.Legacy.Domain.Concretes;
+﻿using SFA.DAS.FAA.Legacy.Domain.Concretes;
+using SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship;
 
 namespace SFA.DAS.FAA.Legacy.Domain.Models.Candidate
 {
     public class Candidate : BaseEntity
     {
-        public Candidate()
-        {
-            RegistrationDetails = new RegistrationDetails();
-            ApplicationTemplate = new ApplicationTemplate();
-            CommunicationPreferences = new CommunicationPreferences();
-            HelpPreferences = new HelpPreferences();
-            MonitoringInformation = new MonitoringInformation();
-            SubscriberId = Guid.NewGuid();
-        }
-
         public int LegacyCandidateId { get; set; }
 
-        public Guid SubscriberId { get; set; }
+        public Guid SubscriberId { get; set; } = Guid.NewGuid();
 
-        public RegistrationDetails RegistrationDetails { get; set; }
+        public RegistrationDetails RegistrationDetails { get; init; } = new();
 
-        public ApplicationTemplate ApplicationTemplate { get; set; }
+        public ApplicationTemplate ApplicationTemplate { get; set; } = new();
 
-        public CommunicationPreferences CommunicationPreferences { get; set; }
+        public CommunicationPreferences CommunicationPreferences { get; set; } = new();
 
-        public HelpPreferences HelpPreferences { get; set; }
+        public HelpPreferences HelpPreferences { get; set; } = new();
 
-        public MonitoringInformation MonitoringInformation { get; set; }
-
-        
+        public MonitoringInformation MonitoringInformation { get; set; } = new();
     }
 }
