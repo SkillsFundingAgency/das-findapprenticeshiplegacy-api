@@ -11,7 +11,13 @@ namespace SFA.DAS.FAA.Legacy.Data.Mapper
                 DateCreated = mongoCandidate.DateCreated,
                 DateUpdated = mongoCandidate.DateUpdated,
                 EntityId = mongoCandidate.EntityId,
-                RegistrationDetails = mongoCandidate.RegistrationDetails
+                RegistrationDetails = mongoCandidate.RegistrationDetails,
+                ApplicationTemplate = mongoCandidate.ApplicationTemplate,
+                CommunicationPreferences = mongoCandidate.CommunicationPreferences,
+                HelpPreferences = mongoCandidate.HelpPreferences,
+                LegacyCandidateId = mongoCandidate.LegacyCandidateId,
+                MonitoringInformation = mongoCandidate.MonitoringInformation,
+                SubscriberId = mongoCandidate.SubscriberId
             };
         }
     }
