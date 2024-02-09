@@ -2,11 +2,6 @@
 {
     public class HelpPreferences
     {
-        public bool ShowSearchTour { get; set; }
-
-        public HelpPreferences()
-        {
-            ShowSearchTour = true;
-        }
+        public bool ShowSearchTour { get; set; } = true;
     }
 }

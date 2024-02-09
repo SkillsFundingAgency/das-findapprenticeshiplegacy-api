@@ -2,49 +2,37 @@
 {
     public class CommunicationPreferences
     {
-        public bool VerifiedMobile { get; set; }
+        public bool VerifiedMobile { get; set; } = false;
 
-        public string MobileVerificationCode { get; set; }
+        public string MobileVerificationCode { get; set; } = string.Empty;
 
-        public DateTime? MobileVerificationCodeDateCreated { get; set; }
+        public DateTime? MobileVerificationCodeDateCreated { get; set; } = null;
 
-        public bool AllowTraineeshipPrompts { get; set; }
+        public bool AllowTraineeshipPrompts { get; set; } = true;
 
-        public CommunicationPreference ApplicationStatusChangePreferences { get; set; }
-
-        public CommunicationPreference ExpiringApplicationPreferences { get; set; }
-
-        public CommunicationPreference SavedSearchPreferences { get; set; }
-
-        public CommunicationPreference MarketingPreferences { get; set; }
-
-        public CommunicationPreferences()
+        public CommunicationPreference ApplicationStatusChangePreferences { get; set; } = new()
         {
-            VerifiedMobile = false;
-            MobileVerificationCode = string.Empty;
-            MobileVerificationCodeDateCreated = null;
-            AllowTraineeshipPrompts = true;
-            ApplicationStatusChangePreferences = new CommunicationPreference
-            {
-                EnableEmail = true,
-                EnableText = true
-            };
-            ExpiringApplicationPreferences = new CommunicationPreference
-            {
-                EnableEmail = true,
-                EnableText = true
-            };
-            SavedSearchPreferences = new CommunicationPreference
-            {
-                EnableEmail = true,
-                EnableText = false
-            };
-            MarketingPreferences = new CommunicationPreference
-            {
-                EnableEmail = true,
-                EnableText = true
-            };
-        }
+            EnableEmail = true,
+            EnableText = true
+        };
+
+        public CommunicationPreference ExpiringApplicationPreferences { get; set; } = new()
+        {
+            EnableEmail = true,
+            EnableText = true
+        };
+
+        public CommunicationPreference SavedSearchPreferences { get; set; } = new()
+        {
+            EnableEmail = true,
+            EnableText = false
+        };
+
+        public CommunicationPreference MarketingPreferences { get; set; } = new()
+        {
+            EnableEmail = true,
+            EnableText = true
+        };
     }
 
     public class CommunicationPreference
