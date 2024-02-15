@@ -2,5 +2,5 @@
 
 public static class RoleNames
 {
-    public static string Apim => "APIM";
+    public static string Default => "default";
 }

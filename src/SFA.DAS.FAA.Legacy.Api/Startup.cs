@@ -60,7 +60,7 @@ namespace SFA.DAS.FAA.Legacy.Api
 
                 var policies = new Dictionary<string, string>
                 {
-                    {PolicyNames.Default, RoleNames.Apim}
+                    {PolicyNames.Default, RoleNames.Default}
                 };
 
                 services.AddAuthentication(azureAdConfiguration, policies);
