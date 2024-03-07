@@ -9,10 +9,10 @@ namespace SFA.DAS.FAA.Legacy.Api.Common
     [ExcludeFromCodeCoverage]
     public abstract class ActionResponseControllerBase : ControllerBase
     {
-        public const string GetMethodName = "Get";
+        private const string GetMethodName = "Get";
         public const string PutMethodName = "Put";
 
-        public abstract string ControllerName { get; }
+        protected abstract string ControllerName { get; }
 
         protected IActionResult GetResponse<T>(ValidatedResponse<T> response) where T : class
         {
@@ -23,7 +23,8 @@ namespace SFA.DAS.FAA.Legacy.Api.Common
             return new BadRequestObjectResult(FormatErrors(response.Errors));
         }
 
-        protected IActionResult GetPostResponse<T>(ValidatedResponse<T> response, object? routeParameters) where T : class
+        protected IActionResult GetPostResponse<T>(ValidatedResponse<T> response, object? routeParameters)
+            where T : class
         {
             if (response.IsValidResponse)
             {
@@ -40,7 +41,7 @@ namespace SFA.DAS.FAA.Legacy.Api.Common
 
         protected IActionResult GetPatchResponse(ValidatedResponse<SuccessCommandResult> response)
         {
-            if (response.Result is { IsSuccess: false }) return NotFound();
+            if (response.Result is {IsSuccess: false}) return NotFound();
 
             if (response.IsValidResponse) return NoContent();
 

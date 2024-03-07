@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SFA.DAS.FAA.Legacy.Api.Controllers;
 using SFA.DAS.FAA.Legacy.Application.Apprenticeship.Queries;
+using SFA.DAS.FAA.Legacy.Application.Mediatr.Responses;
 using SFA.DAS.Testing.AutoFixture;
 
 namespace SFA.DAS.FAA.Legacy.Api.UnitTests.Controllers.Apprenticeship
@@ -13,12 +14,13 @@ namespace SFA.DAS.FAA.Legacy.Api.UnitTests.Controllers.Apprenticeship
     {
         [Test, MoqAutoData]
         public async Task GetApprenticeshipsByEmail_InvokesQueryHandler(
-       [Frozen] Mock<IMediator> mediatorMock,
-       [Greedy] ApprenticeshipController sut,
-       string email)
+            [Frozen] Mock<IMediator> mediatorMock,
+            [Greedy] ApprenticeshipController sut,
+            string email)
         {
             await sut.Get(email);
-            mediatorMock.Verify(m => m.Send(It.Is<GetApprenticeshipsByEmailQuery>(q => q.Email == email), It.IsAny<CancellationToken>()));
+            mediatorMock.Verify(m => m.Send(It.Is<GetApprenticeshipsByEmailQuery>(q => q.Email == email),
+                It.IsAny<CancellationToken>()));
         }
 
         [Test]
@@ -27,15 +29,18 @@ namespace SFA.DAS.FAA.Legacy.Api.UnitTests.Controllers.Apprenticeship
             [Frozen] Mock<IMediator> mediatorMock,
             [Greedy] ApprenticeshipController sut,
             string email,
-            GetApprenticeshipsByEmailQueryResult response)
+            GetApprenticeshipsByEmailQueryResult getApprenticeshipsByEmailQueryResult)
         {
-            mediatorMock.Setup(m => m.Send(It.Is<GetApprenticeshipsByEmailQuery>(q => q.Email == email), It.IsAny<CancellationToken>()))
+            var response =
+                new ValidatedResponse<GetApprenticeshipsByEmailQueryResult>(getApprenticeshipsByEmailQueryResult);
+            mediatorMock.Setup(m => m.Send(It.Is<GetApprenticeshipsByEmailQuery>(q => q.Email == email),
+                    It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
             var result = await sut.Get(email);
 
             result.As<OkObjectResult>().Should().NotBeNull();
-            result.As<OkObjectResult>().Value.Should().Be(response);
+            result.As<OkObjectResult>().Value.Should().Be(getApprenticeshipsByEmailQueryResult);
         }
     }
 }

@@ -11,26 +11,28 @@ namespace SFA.DAS.FAA.Legacy.Application.UnitTests.Apprenticeship.Queries.GetApp
     public class GetApprenticeshipsByEmailQueryHandlerTests
     {
         [Test, RecursiveMoqAutoData]
-        public async Task Handle_ReturnsApprenticeshipsByEmail_IfUserIsFound(
+        public async Task Handle_ReturnsApprenticeshipsByEmail_IfApprenticeshipsIsFound(
             [Frozen] Mock<IApprenticeshipsReadRepository> apprenticeshipsReadRepositoryMock,
             GetApprenticeshipsByEmailHandler sut,
             List<MongoApprenticeships> apprenticeships)
         {
             apprenticeshipsReadRepositoryMock.Setup(a => a.Get(It.IsAny<string>())).Returns(apprenticeships);
-            var result = await sut.Handle(new GetApprenticeshipsByEmailQuery(It.IsAny<string>()), new CancellationToken());
-            result.Apprenticeships.Should().BeEquivalentTo(apprenticeships, c => c.ExcludingMissingMembers());
-            result.Count.Should().Be(apprenticeships.Count);
+            var response = await sut.Handle(new GetApprenticeshipsByEmailQuery(It.IsAny<string>()),
+                new CancellationToken());
+            response.Result.Apprenticeships.Should().BeEquivalentTo(apprenticeships, c => c.ExcludingMissingMembers());
+            response.Result.Count.Should().Be(apprenticeships.Count);
         }
 
         [Test, RecursiveMoqAutoData]
-        public async Task Handle_ReturnsNull_IfUserIsNotFound(
+        public async Task Handle_ReturnsNull_IfApprenticeshipsIsNotFound(
             [Frozen] Mock<IApprenticeshipsReadRepository> apprenticeshipsReadRepositoryMock,
             GetApprenticeshipsByEmailHandler sut)
         {
-            apprenticeshipsReadRepositoryMock.Setup(a => a.Get(It.IsAny<string>())).Returns(() => new List<Domain.Models.Application.Apprenticeship>());
-            var result = await sut.Handle(new GetApprenticeshipsByEmailQuery(It.IsAny<string>()), new CancellationToken());
-            result.Apprenticeships.Should().BeEmpty();
-            result.Count.Should().Be(0);
+            apprenticeshipsReadRepositoryMock.Setup(a => a.Get(It.IsAny<string>()))
+                .Returns(() => new List<Domain.Models.Application.Apprenticeship>());
+            var response = await sut.Handle(new GetApprenticeshipsByEmailQuery(It.IsAny<string>()),
+                new CancellationToken());
+            response.Result.Should().BeNull();
         }
     }
 }

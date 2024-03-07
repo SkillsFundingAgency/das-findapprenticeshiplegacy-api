@@ -7,24 +7,19 @@ using System.Diagnostics.CodeAnalysis;
 namespace SFA.DAS.FAA.Legacy.Application.Mediatr.Behaviours
 {
     [ExcludeFromCodeCoverage]
-    public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class ValidationBehaviour<TRequest, TResponse>(
+        IValidator<TRequest> compositeValidator,
+        ILogger<TRequest> logger)
+        : IPipelineBehavior<TRequest, TResponse>
         where TResponse : ValidatedResponse
         where TRequest : IRequest<TResponse>
     {
-        private readonly IValidator<TRequest> _compositeValidator;
-        private readonly ILogger<TRequest> _logger;
-
-        public ValidationBehaviour(IValidator<TRequest> compositeValidator, ILogger<TRequest> logger)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+            CancellationToken cancellationToken)
         {
-            _compositeValidator = compositeValidator;
-            _logger = logger;
-        }
+            logger.LogTrace("Validating FAA Legacy API Connector request");
 
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
-        {
-            _logger.LogTrace("Validating FAA Legacy API Connector request");
-
-            var result = await _compositeValidator.ValidateAsync(request, cancellationToken);
+            var result = await compositeValidator.ValidateAsync(request, cancellationToken);
 
             if (!result.IsValid)
             {
@@ -32,7 +27,7 @@ namespace SFA.DAS.FAA.Legacy.Application.Mediatr.Behaviours
                     (acc, current) => acc + string.Concat(' ', current)
                 );
 
-                _logger.LogTrace("{errors}", errors);
+                logger.LogTrace("{errors}", errors);
 
                 var responseType = typeof(TResponse);
 
@@ -47,7 +42,7 @@ namespace SFA.DAS.FAA.Legacy.Application.Mediatr.Behaviours
                 }
             }
 
-            _logger.LogTrace("Validation passed");
+            logger.LogTrace("Validation passed");
 
             var response = await next();
 
