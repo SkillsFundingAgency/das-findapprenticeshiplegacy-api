@@ -15,7 +15,9 @@ using SFA.DAS.FAA.Legacy.Domain.Interfaces.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Identity.Client;
 using SFA.DAS.FAA.Legacy.Api.HealthCheck;
+using SFA.DAS.FAA.Legacy.Application.Services;
 
 namespace SFA.DAS.FAA.Legacy.Api
 {
@@ -106,6 +108,11 @@ namespace SFA.DAS.FAA.Legacy.Api
 
             services.Configure<MongoConfiguration>(Configuration.GetSection("MongoConfiguration"));
             services.AddSingleton<IMongoConfiguration>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoConfiguration>>().Value);
+
+            services.Configure<UserAccountConfiguration>(Configuration.GetSection("UserAccountConfiguration"));
+            services.AddSingleton<IUserAccountConfiguration>(serviceProvider => serviceProvider.GetRequiredService<IOptions<UserAccountConfiguration>>().Value);
+
+            services.AddSingleton<IPasswordHash>(new PasswordHash());
 
             services.AddApplicationRegistrations();
         }
