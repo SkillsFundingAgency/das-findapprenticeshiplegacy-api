@@ -38,8 +38,31 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
        
         public string? PendingUsernameCode { get; init; }
 
-        public RegistrationDetails? RegistrationDetails { get; init; }
+        public RegistrationDetails? RegistrationDetails { get; set; }
 
-        public CommunicationPreferences? CommunicationPreferences { get; init; }
+        public CommunicationPreferences? CommunicationPreferences { get; set; }
+
+        public static implicit operator GetUserByEmailResult(Domain.Models.User.User user)
+        {
+            return new GetUserByEmailResult
+            {
+                Username = user.Username,
+                AccountUnlockCode = user.AccountUnlockCode,
+                ActivationCode = user.ActivationCode,
+                AccountUnlockCodeExpiry = user.AccountUnlockCodeExpiry,
+                LastActivity = user.LastActivity,
+                PendingUsername = user.PendingUsername,
+                ActivateCodeExpiry = user.ActivateCodeExpiry,
+                ActivationDate = user.ActivationDate,
+                LastLogin = user.LastLogin,
+                LoginIncorrectAttempts = user.LoginIncorrectAttempts,
+                PasswordResetCode = user.PasswordResetCode,
+                PasswordResetCodeExpiry = user.PasswordResetCodeExpiry,
+                PasswordResetIncorrectAttempts = user.PasswordResetIncorrectAttempts,
+                PendingUsernameCode = user.PendingUsernameCode,
+                Roles = user.Roles,
+                Status = user.Status
+            };
+        }
     }
 }

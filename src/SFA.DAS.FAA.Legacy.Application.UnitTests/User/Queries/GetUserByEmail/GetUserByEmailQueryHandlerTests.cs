@@ -30,12 +30,15 @@ namespace SFA.DAS.FAA.Legacy.Application.UnitTests.User.Queries.GetUserByEmail
         [Test, RecursiveMoqAutoData]
         public async Task Handle_ReturnsNull_IfUserIsNotFound(
             [Frozen] Mock<IUserReadRepository> userReadRepositoryMock,
+            [Frozen] Mock<ICandidateReadRepository> candidateReadRepositoryMock,
             GetUserByEmailHandler sut,
             string email)
         {
             userReadRepositoryMock.Setup(a => a.Get(email)).Returns(() => null);
             var result = await sut.Handle(new GetUserByEmailQuery(email), new CancellationToken());
             result.Result.Should().BeNull();
+
+            candidateReadRepositoryMock.Verify(fil => fil.Get(email), Times.Never);
         }
     }
 }

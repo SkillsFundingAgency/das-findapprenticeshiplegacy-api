@@ -17,34 +17,12 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
             validator.ValidateAndThrow(request);
 
             var user = userReadRepository.Get(request.Email);
-            if (user is null)
-            {
-                return Task.FromResult(ValidatedResponse<GetUserByEmailResult>.EmptySuccessResponse());
-            }
+            if (user is null) return Task.FromResult(ValidatedResponse<GetUserByEmailResult>.EmptySuccessResponse());
 
+            var result = (GetUserByEmailResult)user;
             var candidate = candidateReadRepository.Get(request.Email);
-
-            var result = new GetUserByEmailResult
-            {
-                Username = user.Username,
-                AccountUnlockCode = user.AccountUnlockCode,
-                ActivationCode = user.ActivationCode,
-                AccountUnlockCodeExpiry = user.AccountUnlockCodeExpiry,
-                LastActivity = user.LastActivity,
-                PendingUsername = user.PendingUsername,
-                ActivateCodeExpiry = user.ActivateCodeExpiry,
-                ActivationDate = user.ActivationDate,
-                LastLogin = user.LastLogin,
-                LoginIncorrectAttempts = user.LoginIncorrectAttempts,
-                PasswordResetCode = user.PasswordResetCode,
-                PasswordResetCodeExpiry = user.PasswordResetCodeExpiry,
-                PasswordResetIncorrectAttempts = user.PasswordResetIncorrectAttempts,
-                PendingUsernameCode = user.PendingUsernameCode,
-                Roles = user.Roles,
-                Status = user.Status,
-                RegistrationDetails = candidate?.RegistrationDetails,
-                CommunicationPreferences = candidate?.CommunicationPreferences,
-            };
+            result.RegistrationDetails = candidate?.RegistrationDetails;
+            result.CommunicationPreferences = candidate?.CommunicationPreferences;
 
             return Task.FromResult(new ValidatedResponse<GetUserByEmailResult>(result));
         }
