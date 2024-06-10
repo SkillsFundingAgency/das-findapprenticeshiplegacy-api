@@ -1,4 +1,6 @@
-﻿using SFA.DAS.FAA.Legacy.Domain.Models.User;
+﻿using SFA.DAS.FAA.Legacy.Domain.Models.Apprenticeship;
+using SFA.DAS.FAA.Legacy.Domain.Models.Candidate;
+using SFA.DAS.FAA.Legacy.Domain.Models.User;
 
 namespace SFA.DAS.FAA.Legacy.Application.User.Queries
 {
@@ -35,6 +37,10 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
         public string? PendingUsername { get; init; }
        
         public string? PendingUsernameCode { get; init; }
+
+        public RegistrationDetails? RegistrationDetails { get; set; }
+
+        public CommunicationPreferences? CommunicationPreferences { get; set; }
 
         public static implicit operator GetUserByEmailResult(Domain.Models.User.User user)
         {
