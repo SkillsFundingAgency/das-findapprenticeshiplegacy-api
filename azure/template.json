@@ -60,9 +60,6 @@
         "utcValue": {
             "type": "string",
             "defaultValue": "[utcNow()]"
-        },
-        "userAccountConfigurationUserDirectorySecretKey" : {
-            "type": "string"
         }
     },
     "variables": {
