@@ -40,4 +40,5 @@ public class Apprenticeship : BaseEntity
     public string? WithdrawnOrDeclinedReason { get; init; }
 
     public VacancyDetail? Vacancy { get; init; }
+    public Guid ApplicationId { get; set; }
 }
