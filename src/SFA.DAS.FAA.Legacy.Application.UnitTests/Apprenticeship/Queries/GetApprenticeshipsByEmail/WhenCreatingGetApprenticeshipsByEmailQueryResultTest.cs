@@ -14,6 +14,7 @@ namespace SFA.DAS.FAA.Legacy.Application.UnitTests.Apprenticeship.Queries.GetApp
 
             using (new AssertionScope())
             {
+                actual.Id.Should().Be(source.ApplicationId);
                 actual.Status.Should().Be(source.Status);
                 actual.AdditionalQuestion1Answer.Should().Be(source.AdditionalQuestion1Answer);
                 actual.AdditionalQuestion2Answer.Should().Be(source.AdditionalQuestion2Answer);

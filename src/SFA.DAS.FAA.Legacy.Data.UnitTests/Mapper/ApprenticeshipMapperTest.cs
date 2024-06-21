@@ -18,6 +18,7 @@ namespace SFA.DAS.FAA.Legacy.Data.UnitTests.Mapper
             //assert
             using (new AssertionScope())
             {
+                sut.ApplicationId.Should().Be(mongoApprenticeships.Id);
                 sut.Status.Should().Be(mongoApprenticeships.Status);
                 sut.AdditionalQuestion1Answer.Should().Be(mongoApprenticeships.AdditionalQuestion1Answer);
                 sut.AdditionalQuestion2Answer.Should().Be(mongoApprenticeships.AdditionalQuestion2Answer);

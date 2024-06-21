@@ -19,7 +19,9 @@ namespace SFA.DAS.FAA.Legacy.Application.UnitTests.Apprenticeship.Queries.GetApp
             apprenticeshipsReadRepositoryMock.Setup(a => a.Get(It.IsAny<string>())).Returns(apprenticeships);
             var response = await sut.Handle(new GetApprenticeshipsByEmailQuery(It.IsAny<string>()),
                 new CancellationToken());
-            response.Result.Apprenticeships.Should().BeEquivalentTo(apprenticeships, c => c.ExcludingMissingMembers());
+            response.Result.Apprenticeships.Should().BeEquivalentTo(apprenticeships, c => c.ExcludingMissingMembers().Excluding(x=>x.Id));
+            response.Result.Apprenticeships!.Select(c => c.Id).Should()
+                .BeEquivalentTo(apprenticeships.Select(c => c.ApplicationId));
             response.Result.Count.Should().Be(apprenticeships.Count);
         }
 

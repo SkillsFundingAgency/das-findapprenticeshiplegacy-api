@@ -8,6 +8,7 @@ namespace SFA.DAS.FAA.Legacy.Data.Mapper
         {
             return new Domain.Models.Application.Apprenticeship
             {
+                ApplicationId = mongoApprenticeships.Id,
                 Status = mongoApprenticeships.Status,
                 AdditionalQuestion1Answer = mongoApprenticeships.AdditionalQuestion1Answer,
                 AdditionalQuestion2Answer = mongoApprenticeships.AdditionalQuestion2Answer,
