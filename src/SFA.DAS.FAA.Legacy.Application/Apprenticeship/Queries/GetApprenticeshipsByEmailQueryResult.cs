@@ -31,11 +31,13 @@ public record ApprenticeshipResult
     public RegistrationDetails? CandidateDetails { get; private init; }
     public ApplicationTemplate? CandidateInformation { get; private init; }
     public VacancyDetail? Vacancy { get; private init; }
+    public Guid Id { get; set; }
 
     public static implicit operator ApprenticeshipResult(Domain.Models.Application.Apprenticeship source)
     {
         return new ApprenticeshipResult
         {
+            Id= source.ApplicationId,
             Status = source.Status,
             AdditionalQuestion1Answer = source.AdditionalQuestion1Answer,
             AdditionalQuestion2Answer = source.AdditionalQuestion2Answer,
