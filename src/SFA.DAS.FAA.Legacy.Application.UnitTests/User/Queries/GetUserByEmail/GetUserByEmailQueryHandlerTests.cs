@@ -23,8 +23,9 @@ namespace SFA.DAS.FAA.Legacy.Application.UnitTests.User.Queries.GetUserByEmail
             userReadRepositoryMock.Setup(a => a.Get(email)).Returns(user);
             candidateReadRepositoryMock.Setup(a => a.Get(email)).Returns(candidate);
             var result = await sut.Handle(new GetUserByEmailQuery(email), new CancellationToken());
-            result.Result.Should().BeEquivalentTo(user, c => c.ExcludingMissingMembers());
-            result.Result.Should().BeEquivalentTo(candidate, c => c.ExcludingMissingMembers());
+            result.Result.Should().BeEquivalentTo(user, c => c.ExcludingMissingMembers().Excluding(cx=>cx.Id));
+            result.Result.Should().BeEquivalentTo(candidate, c => c.ExcludingMissingMembers().Excluding(cx=>cx.Id));
+            result.Result.Id.Should().Be(user.EntityId);
         }
 
         [Test, RecursiveMoqAutoData]
