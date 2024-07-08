@@ -6,6 +6,7 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
 {
     public class GetUserByEmailResult
     {
+        public Guid Id { get; set; }
         public string? Username { get; init; }
 
         public UserStatuses Status { get; init; }
@@ -61,7 +62,8 @@ namespace SFA.DAS.FAA.Legacy.Application.User.Queries
                 PasswordResetIncorrectAttempts = user.PasswordResetIncorrectAttempts,
                 PendingUsernameCode = user.PendingUsernameCode,
                 Roles = user.Roles,
-                Status = user.Status
+                Status = user.Status,
+                Id = user.EntityId
             };
         }
     }
