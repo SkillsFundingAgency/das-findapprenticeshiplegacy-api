@@ -4,7 +4,7 @@
 
 <img src="https://avatars.githubusercontent.com/u/9841374?s=200&v=4" align="right" alt="UK Government logo">
 
-[![Build Status](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_apis/build/status%2FFind%20Apprenticeship%2Fdas-findapprenticeshiplegacy-api?repoName=SkillsFundingAgency%2Fdas-findapprenticeshiplegacy-api&branchName=main)
+![Build Status](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_apis/build/status%2FFind%20Apprenticeship%2Fdas-findapprenticeshiplegacy-api?repoName=SkillsFundingAgency%2Fdas-findapprenticeshiplegacy-api&branchName=main)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SkillsFundingAgency_das-findapprenticeshiplegacy-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=SkillsFundingAgency_das-findapprenticeshiplegacy-api)
 
@@ -12,14 +12,14 @@
 
 ## About
 
-The das-findapprenticeshiplegacy-api(https://github.com/SkillsFundingAgency/das-findapprenticeshiplegacy-api) is the inner api for retrieving user's information from recruit's mongodb.
+The das-findapprenticeshiplegacy-api (https://github.com/SkillsFundingAgency/das-findapprenticeshiplegacy-api) is the inner api for retrieving user's information from recruit's mongodb.
 
 ## 🚀 Installation
 
 ### Pre-Requisites
 * A clone of this repository(https://github.com/SkillsFundingAgency/das-findapprenticeshiplegacy-api)
 * A code editor that supports .NetCore 8 and above
-* A storage emulator like Azurite
+* A storage emulator like Azurite (https://learn.microsoft.com/en-us/azure/storage/common/storage-use-emulator)
 * An Azure Active Directory account with the appropriate roles as per the [das-employer-config repository](https://github.com/SkillsFundingAgency/das-employer-config/blob/master/das-findapprenticeshiplegacy-api/SFA.DAS.FindApprenticeshipsLegacy.Api.json)
 
 ### Config
@@ -33,8 +33,8 @@ Data:
 ```json
 {
   "AzureAd": {
-    "identifier": "{{identifier}}",
-    "tenant": "{{tenant}}"
+    "identifier": "https://{TENANT-NAME}/{IDENTIFIER}",
+    "tenant": "{TENANT-NAME}"
   },
   "MongoConfiguration": {
     "AzureCosmosDb": "{{mongoConnectionString}}"
