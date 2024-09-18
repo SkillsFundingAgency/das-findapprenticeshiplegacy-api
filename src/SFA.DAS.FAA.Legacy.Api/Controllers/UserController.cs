@@ -26,19 +26,6 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
             return GetResponse(response);
         }
 
-        [HttpGet]
-        [Route("validate-credentials")]
-        public async Task<IActionResult> ValidateCredentials([FromQuery]string email, [FromQuery] string password)
-        {
-            var response = await mediator.Send(new ValidateUserCredentialsQuery
-            {
-                Email = email,
-                Password = password
-            });
-
-            return GetResponse(response);
-        }
-
         [HttpPost]
         [Route("validate-credentials")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
