@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SFA.DAS.FAA.Legacy.Api.Common;
+using SFA.DAS.FAA.Legacy.Api.Models;
 using SFA.DAS.FAA.Legacy.Application.User.Queries;
 
 namespace SFA.DAS.FAA.Legacy.Api.Controllers
@@ -25,14 +26,16 @@ namespace SFA.DAS.FAA.Legacy.Api.Controllers
             return GetResponse(response);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("validate-credentials")]
-        public async Task<IActionResult> ValidateCredentials([FromQuery]string email, [FromQuery] string password)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidateUserCredentialsQueryResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ValidateUserCredentials(UserCredentialsModel requestModel)
         {
             var response = await mediator.Send(new ValidateUserCredentialsQuery
             {
-                Email = email,
-                Password = password
+                Email = requestModel.Email,
+                Password = requestModel.Password
             });
 
             return GetResponse(response);
