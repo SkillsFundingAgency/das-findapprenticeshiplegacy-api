@@ -44,7 +44,7 @@
         "sharedBackEndAppServicePlanName": {
             "type": "string"
         },
-        "sharedBackEndSubnetResourceId": { 
+        "sharedBackEndSubnetResourceId": {
             "type": "string"
         },
         "backEndAccessRestrictions": {
@@ -60,7 +60,10 @@
         "utcValue": {
             "type": "string",
             "defaultValue": "[utcNow()]"
-        }
+        },
+        "applicationInsightsConnectionString": {
+            "type": "securestring"
+      }
     },
     "variables": {
         "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/master/templates/",
@@ -174,7 +177,7 @@
                                 },
                                 {
                                     "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                                    "value": "[reference(concat(variables('appServiceName'), '-application-insights-', parameters('utcValue'))).outputs.ConnectionString.value]"
+                                    "value": "[parameters('applicationInsightsConnectionString')]"
                                 },
                                 {
                                     "name": "LoggingRedisConnectionString",
